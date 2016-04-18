@@ -7,6 +7,14 @@
     line-height: 1.2em;
 }
 
+a {
+    color: orange;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
 /*body {
     -ms-transform: scale(1.2,1); /* IE 9
     -webkit-transform: scale(1.2,1); /* Safari
@@ -39,7 +47,6 @@ button {
 .color4 { color:aqua }
 .color5 { color:#4444FF }
 .color6 { color:fuchsia }
-.color7 { color:orange }
 
 
 #userButtons {
@@ -55,6 +62,11 @@ button {
 
 #playScreen {
     display: none;
+}
+
+#connectForm{
+    margin-top: 2em;
+    margin-bottom: 5em;
 }
 
 #activePlayers, #topScores {

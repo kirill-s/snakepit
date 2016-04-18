@@ -27,7 +27,7 @@
         $("#btnDisconnect").click(function () {
             ws.close();
             $("#playScreen").hide();
-            $("#connectForm").show();
+            $("#mainScreen").show();
             $(document).unbind("keypress", keyHandler);
         });
 
@@ -47,7 +47,7 @@
 
         sendMessage(["new_player", playerName]);
 
-        $("#connectForm").hide();
+        $("#mainScreen").hide();
         $("#playScreen").show();
 
         $(document).bind("keydown", keyHandler);
@@ -105,6 +105,15 @@
                     score = args[2];
                     $("#player" + id + " .score").text(score);
                     break
+                case("top_scores"):
+                    $("#topScoresList").empty();
+                    players = args[1];
+                    for(var n = 0; n < players.length; n++) {
+                        name = players[n][0];
+                        score = players[n][1];
+                        color = players[n][2];
+                        addTopScore(color, name, score);
+                    }
             }
         }
     }
@@ -138,6 +147,13 @@
                         + '<div class="score ' + color_class + '">' + score + '</div></div>');
     }
 
+    function addTopScore(color, name, score) {
+        var color_class = 'color' + color;
+        $("#topScoresList").append('<div>'
+                        + '<div class="name ' + color_class +'">' + name + '</div>'
+                        + '<div class="score ' + color_class + '">' + score + '</div></div>');
+    }
+
     function keyHandler(event) {
         var code = event.keyCode;
         if (!code && event.charCode)
@@ -162,15 +178,33 @@
 <div>ver 0.1</div>
 
 <div style="margin-top:1em">
-    <div id="connectForm">
-        <span style="color: white">Name</span>
-        <input id="playerName" type="text" maxlength="15" />
-        <button id="btnConnect">Connect</button>
+    <div id="mainScreen">
+        <div id="connectForm">
+            <span style="color: white">Name</span>
+            <input id="playerName" type="text" maxlength="15" />
+            <button id="btnConnect">Connect</button>
+        </div>
+
+        <div>
+        <p><b style="color: white">Snakepit</b> is an open-source multiplayer snake game.</p>
+        <p>It is designed as a demo of <a href="https://docs.python.org/3/library/asyncio.html">asyncio</a> library for Python 3.5.</p>
+
+        <p style="color:red; margin-top: 7em">Rules:</p>
+
+        <div style="text-align: center;">
+            <span style="display: inline-block; text-align: left">
+            <span class="color2">1. Use arrows to control the snake.</span></br/></br/>
+            <span class="color3">2. Eat digits to grow up.</span></br/></br/>
+            <span class="color4">3. Do not bite: stones (#), snakes, borders.</span></br/></br/>
+            <span class="color6">4. Invite friends and have fun together!</span>
+            </span>
+        </div>
+        </div>
     </div>
 
     <div id="playScreen">
         <div id="userForm">
-            Welcome to server, <span id="username"></span>! Invite some friends and Join.
+            Welcome to the server, <span id="username"></span>! Invite some friends and Join.
         </div>
         <div id="userButtons">
             <button id="btnJoin">Join!</button>
@@ -181,7 +215,10 @@
             <div id="worldHolder">
                 <table id="world" cellspacing="0" cellpadding="0"></table>
             </div>
-            <div id="topScores">Top scores</div>
+            <div id="topScores">
+                <div>Top scores</div>
+                <div id="topScoresList"></div>
+            </div>
         </div>
 
     </div>

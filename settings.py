@@ -1,8 +1,9 @@
 
-GAME_SPEED = 2.5  # fps, the more the faster
+GAME_SPEED = 2.3  # fps, the more the faster
 
 MAX_PLAYERS = 10
-NUM_COLORS = 7  # set according to the number of css classes
+MAX_TOP_SCORES = 10
+NUM_COLORS = 6  # set according to the number of css classes
 
 FIELD_SIZE_X = 50  # game field size in characters
 FIELD_SIZE_Y = 25
